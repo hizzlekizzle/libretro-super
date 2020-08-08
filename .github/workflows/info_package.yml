@@ -33,4 +33,4 @@ jobs:
          remote_host: ${{ secrets.HOST }}
          remote_port: ${{ secrets.PORT }}
          remote_user: ${{ secrets.USERNAME }}
-         remote_key: ${{ secrets.PASSWORD }}
+         remote_key: ${{ secrets.KEY }}
