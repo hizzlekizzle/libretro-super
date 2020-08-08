@@ -25,15 +25,14 @@ jobs:
 #        tag: Latest
 #        asset_name: info.7z
 #        overwrite: true
-#    - name: Deploy to server
-#      id: deploy
-#      uses: Pendect/action-rsyncer@v1.1.0
-#      env:
-#        DEPLOY_KEY: ${{secrets.KEY}}
-#      with:
-#        flags: '-avzr --delete'
-#        options: ''
-#        ssh_options: '-p ${{secrets.PORT}}'
-#        src: README
-#        dest: '${{secrets.USERNAME}}@${{secrets.HOST}}:${{secrets.LINUX_PATH_X86_64}}'
-    - run: mkdir -p ~/.ssh && echo ${{secrets.KEY}} >> ~/.ssh/key && rsync -e 'ssh -p ${{secrets.PORT}}' README ${{secrets.USERNAME}}@${{secrets.HOST}}:${{secrets.LINUX_PATH_X86_64}}
+    - name: Deploy to server
+      id: deploy
+      uses: Pendect/action-rsyncer@v1.1.0
+      env:
+        DEPLOY_KEY: ${{secrets.KEY}}
+      with:
+        flags: '-avzr --delete'
+        options: ''
+        ssh_options: '-p ${{secrets.PORT}}'
+        src: README
+        dest: '${{secrets.USERNAME}}@${{secrets.HOST}}:${{secrets.LINUX_PATH_X86_64}}'
