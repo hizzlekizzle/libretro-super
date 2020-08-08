@@ -27,7 +27,7 @@ jobs:
 #        overwrite: true
      - uses: burnett01/rsync-deployments@4.1
        with:
-         switches: -avzr --delete
+         switches: -avzr -e 'ssh -p ${{ secrets.PORT }}' --delete
          path: README
          remote_path: ${{ secrets.LINUX_PATH_X86_64 }}
          remote_host: ${{ secrets.HOST }}
