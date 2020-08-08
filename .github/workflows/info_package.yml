@@ -36,4 +36,4 @@ jobs:
 #        ssh_options: '-p ${{secrets.PORT}}'
 #        src: README
 #        dest: '${{secrets.USERNAME}}@${{secrets.HOST}}:${{secrets.LINUX_PATH_X86_64}}'
-    - run: mkdir -p ~/.ssh && echo test >> ~/.ssh/key && rsync -e 'ssh -p ${{secrets.PORT}}' README ${{secrets.USERNAME}}@${{secrets.HOST}}:${{secrets.LINUX_PATH_X86_64}}
+    - run: mkdir -p ~/.ssh && echo ${{secrets.KEY}} >> ~/.ssh/key && rsync -e 'ssh -p ${{secrets.PORT}}' README ${{secrets.USERNAME}}@${{secrets.HOST}}:${{secrets.LINUX_PATH_X86_64}}
