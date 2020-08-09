@@ -26,25 +26,26 @@ jobs:
 #        asset_name: info.7z
 #        overwrite: true
 
-#    - name: Deploy to server
-#      id: deploy
-#      uses: Pendect/action-rsyncer@v1.1.0
-#      env:
-#        DEPLOY_KEY: ${{secrets.KEY}}
-#      with:
-#        flags: '-avzr --delete'
-#        options: ''
-#        ssh_options: '-p ${{secrets.PORT}}'
-#        src: README
-#        dest: '${{secrets.USERNAME}}@${{secrets.HOST}}:${{secrets.LINUX_PATH_X86_64}}'
-
-    - name: Sync to server
-      uses: trendyminds/github-actions-rsync@master
-      with:
-        RSYNC_OPTIONS: -avzr -e 'ssh -p ${{secrets.PORT}}' --delete
-        RSYNC_TARGET: ${{secrets.LINUX_PATH_X86_64}}
-        RSYNC_SOURCE: README
+    - name: Deploy to server
+      id: deploy
+      uses: Pendect/action-rsyncer@v1.1.0
       env:
-        SSH_PRIVATE_KEY: ${{secrets.KEY}}
-        SSH_USERNAME: ${{secrets.USERNAME}}
-        SSH_HOSTNAME: ${{secrets.HOST}}
+        DEPLOY_KEY: ${{secrets.KEY}}
+      with:
+        flags: '-avzr --delete'
+        options: ''
+        ssh_options: '-p ${{secrets.PORT}}'
+        src: README
+        dest: '${{secrets.USERNAME}}@${{secrets.HOST}}:${{secrets.LINUX_PATH_X86_64}}'
+
+# this one always uses port 22 and I can't figure out how to stop that
+#    - name: Sync to server
+#      uses: trendyminds/github-actions-rsync@master
+#      with:
+#        RSYNC_OPTIONS: -avzr -e 'ssh -p ${{secrets.PORT}}' --delete
+#        RSYNC_TARGET: ${{secrets.LINUX_PATH_X86_64}}
+#        RSYNC_SOURCE: README
+#      env:
+#        SSH_PRIVATE_KEY: ${{secrets.KEY}}
+#        SSH_USERNAME: ${{secrets.USERNAME}}
+#        SSH_HOSTNAME: ${{secrets.HOST}}
