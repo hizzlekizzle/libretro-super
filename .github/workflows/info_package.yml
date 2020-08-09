@@ -26,17 +26,17 @@ jobs:
 #        asset_name: info.7z
 #        overwrite: true
 
-    - name: Deploy to server
-      id: deploy
-      uses: Pendect/action-rsyncer@v1.1.0
-      env:
-        DEPLOY_KEY: ${{secrets.KEY}}
-      with:
-        flags: '-avzr --delete'
-        options: ''
-        ssh_options: '-p ${{secrets.PORT}}'
-        src: README
-        dest: '${{secrets.USERNAME}}@${{secrets.HOST}}:${{secrets.LINUX_PATH_X86_64}}'
+#    - name: Deploy to server
+#      id: deploy
+#      uses: Pendect/action-rsyncer@v1.1.0
+#      env:
+#        DEPLOY_KEY: ${{secrets.KEY}}
+#      with:
+#        flags: '-avzr --delete'
+#        options: ''
+#        ssh_options: '-p ${{secrets.PORT}}'
+#        src: README
+#        dest: '${{secrets.USERNAME}}@${{secrets.HOST}}:${{secrets.LINUX_PATH_X86_64}}'
 
 # this one always uses port 22 and I can't figure out how to stop that
 #    - name: Sync to server
@@ -49,3 +49,8 @@ jobs:
 #        SSH_PRIVATE_KEY: ${{secrets.KEY}}
 #        SSH_USERNAME: ${{secrets.USERNAME}}
 #        SSH_HOSTNAME: ${{secrets.HOST}}
+
+    - uses: webfactory/ssh-agent@v0.4.0
+      with:
+        ssh-private-key: ${{ secrets.KEY }}
+    - run: scp README ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ secrets.LINUX_PATH_X86_64 }}
