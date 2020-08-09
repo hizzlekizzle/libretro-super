@@ -53,4 +53,4 @@ jobs:
     - uses: webfactory/ssh-agent@v0.4.0
       with:
         ssh-private-key: ${{ secrets.KEY }}
-    - run: scp -p ${{ secrets.PORT }} ./README ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ secrets.LINUX_PATH_X86_64 }}
+    - run: scp -P ${{ secrets.PORT }} ./README ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ secrets.LINUX_PATH_X86_64 }}
