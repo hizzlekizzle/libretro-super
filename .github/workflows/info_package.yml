@@ -41,7 +41,7 @@ jobs:
     - name: Sync to server
       uses: trendyminds/github-actions-rsync@master
       with:
-        RSYNC_OPTIONS: -avzr --delete
+        RSYNC_OPTIONS: -avzr -e 'ssh -p ${{secrets.PORT}}' --delete
         RSYNC_TARGET: ${{secrets.LINUX_PATH_X86_64}}
         RSYNC_SOURCE: README
       env:
